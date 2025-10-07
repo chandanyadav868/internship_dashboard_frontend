@@ -1,33 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Outlet } from "react-router"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import { useEffect, useState } from "react"
+import { useContextProvider } from "./context/ContextProvider";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { authenticationUser, authUser } = useContextProvider();
+  const [applicationLoading, setApplicationLoading] = useState(false)
 
+  useEffect(() => {
+    const userFetching = async () => {
+      try {
+        setApplicationLoading(true)
+        await authenticationUser();
+        console.log(authUser);
+
+      } catch (error) {
+        const err = error as Error
+        console.log("Error in Data:- ", JSON.parse(err.message));
+        const errorMessageData = JSON.parse(err.message) as unknown as { error: string, message: string, stack: string, status: number };
+        console.log(errorMessageData);
+      } finally {
+        setApplicationLoading(false)
+      }
+    }
+    userFetching()
+  }, [])
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {
+        applicationLoading ?
+          <div className="flex w-screen h-screen justify-center items-center">
+            <span className="text-white text-4xl font-bold">Loading...</span>
+          </div>
+          :
+          <div>
+            {/* header */}
+            <Header />
+            <div className="min-h-lvh">
+              <Outlet />
+            </div>
+            <Footer />
+          </div>
+      }
     </>
   )
 }
