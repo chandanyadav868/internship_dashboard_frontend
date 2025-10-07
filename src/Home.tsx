@@ -1,6 +1,5 @@
 import HeroSection from './components/HeroSection'
 import StatsOverview from './components/StatsOverview'
-import FeaturesSection from './components/FeaturesSection'
 import CallToAction from './components/CallToAction'
 
 function Home() {
@@ -8,7 +7,6 @@ function Home() {
      <div className="min-h-screen bg-gray-50 text-gray-900">
       <HeroSection />
        <StatsOverview />
-      {/* <FeaturesSection />  */}
       <CallToAction />
     </div>
   )

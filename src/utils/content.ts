@@ -5,7 +5,7 @@ export const headers = [
         name:"Home"
     },
     {
-        to:"/dashboard/1234424",
+        to:"/dashboard",
         name:"Dashboard"
     },
     {
@@ -23,7 +23,7 @@ export const task = [
     //     to:"/notes",
     //     name:"Notes"
     // },
-    
+
     {
         to:"/posts",
         name:"Posts"

@@ -14,7 +14,7 @@ const CallToAction: React.FC = () => {
                     Join thousands of creators using Postify to grow audience and
                     manage posts efficiently.
                 </Typography>
-                <Link to={"/auth/login"}>
+                <Link to={"/auth/signup"}>
                     <Button
                         text="Create your account"
                         className="bg-white text-blue-600 mt-2 font-bold hover:bg-gray-200"
